@@ -1,13 +1,15 @@
 import { Router } from "express";
 import jwt from "jsonwebtoken";
 import { z } from "zod";
-
+import { userMiddleware } from "../middlewares/userMiddleware";
 
 const contentRouter = Router();
 
+contentRouter.use(userMiddleware); // To do everything with the content the user must be loggedIn
+
 
 contentRouter.post("/create", (req, res) => {
-    res.send("You are on add content endpoint");
+
 })
 
 contentRouter.get("/all", (req, res) => {
