@@ -52,6 +52,7 @@ brainRouter.post("/share", userMiddleware, async (req, res) => {
     }
 })
 
+//http:localhost:3000/api/v1/brain/zarlefda32
 brainRouter.get("/:shareLink", async (req, res) => {
     try {
         const hash = req.params.shareLink;
