@@ -1,6 +1,11 @@
 import express from "express";
 import cors from "cors";
 import { userRouter, contentRouter, brainRouter } from "./routes";
+import dotenv from "dotenv";
+import { userModel } from "./db/db";
+
+// Load environment variables from default location (Brainly-BE/.env)
+dotenv.config();
 
 const app = express();
 
@@ -11,8 +16,9 @@ app.use("/api/v1/user", userRouter); // Now all the users request which will com
 app.use("/api/v1/content", contentRouter);
 app.use("/api/v1/brain", brainRouter);
 
+const PORT = process.env.PORT || 3000;
 
 
-app.listen(3000, () => {
-    console.log("Server is running on port 3000");
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
 });
