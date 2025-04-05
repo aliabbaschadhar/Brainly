@@ -13,8 +13,9 @@ if (!Connection) {
 mongoose.connect(Connection.toString());
 
 const UserSchema = new Schema({
-    username: { type: String, unique: true },
+    username: { type: String, unique: true, required: false },
     password: String,
+    email: { type: String, unique: true }
 })
 
 
