@@ -39,14 +39,21 @@ const ContentSchema = new Schema({
     userId: { type: Schema.Types.ObjectId, ref: "users" }
 });
 
+const LinkSchema = new Schema({
+    hash: { type: String, required: true },
+    userId: { type: Schema.Types.ObjectId, ref: "users", required: true, unique: true }
+})
+
 
 
 
 const userModel = model("users", UserSchema);
 const contentModel = model("contents", ContentSchema);
+const linkModel = model("links", LinkSchema);
 
 
 export {
     userModel,
     contentModel,
+    linkModel,
 }
