@@ -1,5 +1,4 @@
 import { Router } from "express";
-import jwt from "jsonwebtoken";
 import { z } from "zod";
 import { userMiddleware } from "../middlewares/userMiddleware";
 import { contentModel } from "../db/db";
@@ -71,9 +70,9 @@ contentRouter.put("/", async (req, res) => {
 
     const contentSchema = z.object({
         contentId: z.string(),
-        link: z.string().url(),
+        link: z.string().url().optional(),
         title: z.string().optional(),
-        cType: z.enum(['document', 'image', 'video', 'article', 'audio', 'link']),
+        cType: z.enum(['document', 'image', 'video', 'article', 'audio', 'link']).optional(),
         tags: z.array(z.string()).optional(),
     })
 
@@ -132,8 +131,9 @@ contentRouter.put("/", async (req, res) => {
 contentRouter.delete("/", async (req, res) => {
     const { contentId } = req.body;
     try {
-        await contentModel.deleteOne({
-            contentId,
+        await contentModel.findOneAndDelete({
+            // contentId:contentId
+            _id: contentId, // _id because here we are dealing with content table here.
             userId: req.userId, // User is deleting only those posts which are owned by him.
         })
 
