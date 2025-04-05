@@ -20,15 +20,17 @@ const UserSchema = new Schema({
 
 enum ContentType {
     DOCUMENT = 'document',
-    TWEET = 'tweet',
-    YOUTUBE_LINK = 'youtubeLink',
-    LINK = 'link',
+    IMAGE = 'image',
+    VIDEO = 'video',
+    ARTICLE = 'article',
+    AUDIO = 'audio',
+    LINK = 'link'
 }
 
 const ContentSchema = new Schema({
     title: String,
     link: String,
-    type: {
+    cType: {
         type: String,
         required: true,
         enum: Object.values(ContentType)
