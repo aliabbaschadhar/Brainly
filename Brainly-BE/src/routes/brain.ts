@@ -1,6 +1,6 @@
 import { Router } from "express";
 import { userMiddleware } from "../middlewares/userMiddleware";
-import { linkModel } from "../db/db";
+import { contentModel, linkModel, userModel } from "../db/db";
 import { random } from "../utils/random";
 
 
@@ -52,9 +52,60 @@ brainRouter.post("/share", userMiddleware, async (req, res) => {
     }
 })
 
-brainRouter.get("/:shareLink", (req, res) => {
-    res.send("You are on brainShare endpoint");
-})
+brainRouter.get("/:shareLink", async (req, res) => {
+    try {
+        const hash = req.params.shareLink;
+
+        // Optional: Validate hash format/length
+        if (!hash || hash.length !== 10) {
+            res.status(400).json({
+                msg: "Invalid share link format"
+            });
+            return;
+        }
+
+        const link = await linkModel.findOne({ hash });
+
+        if (!link) {
+            res.status(404).json({
+                msg: "Link not found in DB"
+            });
+            return;
+        }
+
+        const content = await contentModel.findOne({
+            userId: link.userId
+        });
+
+        if (!content) {
+            res.status(404).json({
+                msg: "Content not found"
+            });
+            return;
+        }
+
+        const user = await userModel.findOne({
+            _id: link.userId,
+        });
+
+        if (!user) {
+            res.status(404).json({
+                msg: "User not found"
+            });
+            return;
+        }
+
+        // Consider returning only necessary content fields
+        res.status(200).json({
+            user: user.username,
+            content: content
+        });
+    } catch (error) {
+        res.status(500).json({
+            msg: "Internal server error"
+        });
+    }
+});
 
 
 export { brainRouter };
