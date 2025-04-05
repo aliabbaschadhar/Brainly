@@ -2,6 +2,9 @@
   "name": "brainly-be",
   "module": "index.ts",
   "type": "module",
+  "scripts": {
+    "dev": "nodemon --exec \"bun run src/index.ts\" --ext ts,json"
+  },
   "devDependencies": {
     "@types/bun": "latest"
   },
@@ -10,6 +13,7 @@
   },
   "dependencies": {
     "@types/bcrypt": "^5.0.2",
+    "@types/cors": "^2.8.17",
     "@types/dotenv": "^8.2.3",
     "@types/express": "^5.0.1",
     "@types/jsonwebtoken": "^9.0.9",
