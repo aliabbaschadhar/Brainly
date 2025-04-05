@@ -66,26 +66,6 @@ contentRouter.get("/", async (req, res) => {
     }
 })
 
-// Delete a post
-contentRouter.delete("/", async (req, res) => {
-    const { contentId } = req.body;
-    try {
-        await contentModel.deleteOne({
-            contentId,
-            userId: req.userId, // User is deleting only those posts which are owned by him.
-        })
-
-        res.status(200).json({
-            msg: "Content deleted",
-        })
-    } catch (error) {
-        res.status(404).json({
-            msg: "Some error occured while deleting",
-            error: error
-        })
-    }
-})
-
 // Update a post
 contentRouter.put("/", async (req, res) => {
 
@@ -144,6 +124,56 @@ contentRouter.put("/", async (req, res) => {
             msg: "Content not updated!",
             error: error
         })
+    }
+})
+
+
+// Delete a post
+contentRouter.delete("/", async (req, res) => {
+    const { contentId } = req.body;
+    try {
+        await contentModel.deleteOne({
+            contentId,
+            userId: req.userId, // User is deleting only those posts which are owned by him.
+        })
+
+        res.status(200).json({
+            msg: "Content deleted",
+        })
+    } catch (error) {
+        res.status(404).json({
+            msg: "Some error occured while deleting",
+            error: error
+        })
+    }
+})
+
+// Delete all posts
+contentRouter.delete("/all", async (req, res) => {
+    try {
+        const userId = req.userId;// from userMiddleware
+
+        const result = await contentModel.deleteMany({ userId });
+
+        if (result.deletedCount === 0) {
+            res.status(404).json({
+                msg: "No content to delete "
+            });
+            return;
+        }
+
+        res.status(200).json({
+            msg: `Successfully deleted ${result.deletedCount} content items`,
+            deletedCount: result.deletedCount
+        })
+        return;
+    } catch (error) {
+        console.error("Error deleting count");
+        res.status(500).json({
+            msg: "Failed to delete the content",
+            error: error,
+        })
+        return;
     }
 })
 
