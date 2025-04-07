@@ -1,3 +1,49 @@
+# Brainly Frontend
+
+This is the frontend application for Brainly, a modern web application built with React, TypeScript, and Vite.
+
+## Features
+
+- User authentication (Sign up, Sign in)
+- Dashboard interface
+- Content creation and management
+- Real-time interactions
+
+## Screenshots
+
+### Sign Up Page
+
+![Sign Up Page](./src/assets/images/signUp.png)
+
+### Sign In Page
+
+![Sign In Page](./src/assets/images/signIn.png)
+
+## Tech Stack
+
+- React 18
+- TypeScript
+- Vite
+- Modern CSS
+- RESTful API integration
+
+## Getting Started
+
+1. Clone the repository
+2. Install dependencies with `bun install`
+3. Start the development server with `bun dev`
+4. Build for production with `bun build`
+
+## Project Structure
+
+- `src/components`: Reusable UI components
+- `src/pages`: Main application pages
+- `src/hooks`: Custom React hooks
+- `src/icons`: SVG icons as React components
+- `src/assets`: Static assets
+
+## Original Template Information
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
