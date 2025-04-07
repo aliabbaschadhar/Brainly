@@ -2,6 +2,16 @@
 
 Brainly is a full-stack application that helps users organize and manage content from various sources.
 
+## Screenshots
+
+### Sign Up Page
+
+![Sign Up Page](./Brainly-FE/src/assets/images/signUp.png)
+
+### Sign In Page
+
+![Sign In Page](./Brainly-FE/src/assets/images/signIn.png)
+
 ## Tech Stack
 
 - **Frontend**: React with TypeScript, Vite, Tailwind CSS
