@@ -1,41 +1,54 @@
 import { ReactElement } from "react";
 
-type variants = "primary" | "secondary"
-
-export interface ButtonProps {
-    variant: variants;
-    size: "sm" | "md" | "lg";
-    text: string;
-    startIcon?: ReactElement;
-    endIcon?: ReactElement;
-    onClick: () => void;
+interface ButtonProps {
+  variant: "primary" | "secondary";
+  startIcon?: ReactElement;
+  text: string;
+  onClick?: () => void;
+  fullWidth?: boolean;
+  loading?: boolean;
 }
 
-const defaultStyles = "flex rounded-md p-4 m-2 cursor-pointer"
-const variantStyles = {
-    "primary": "bg-purple-600 text-white",
-    "secondary": "bg-purple-300 text-purple-600 "
+const variantClass = {
+  // primary: "bg-[#7E1891] text-white",
+  primary: "bg-blue-600 text-white",
+  secondary: "bg-[#d9ddee] text-[#7164c0]",
+};
+
+const defaultStyles =
+  "rounded-md font-semibold px-5 py-2.5 flex justify-center items-center cursor-pointer";
+
+export function Button({
+  onClick,
+  variant,
+  text,
+  startIcon,
+  fullWidth,
+  loading,
+}: ButtonProps) {
+  return (
+    <>
+      <button
+        disabled={loading}
+        onClick={onClick}
+        className={`${variantClass[variant]} ${defaultStyles} ${
+          fullWidth ? "w-full" : ""
+        } ${loading ? "opacity-50" : ""}`}
+      >
+        <div className="pr-3">{startIcon}</div>
+        {text}
+      </button>
+    </>
+  );
 }
-const sizeStyles = {
-    "sm": "py-1 px-2",
-    "md": "py-2 px-4",
-    "lg": "py-4 px-6",
-}
 
-
-function Button({ variant, size, onClick, text, startIcon, endIcon }: ButtonProps) {
-    return (
-        <button
-            className={` ${defaultStyles}  ${variantStyles[variant]} ${sizeStyles[size]} `}
-            onClick={() => onClick}
-        >
-            {startIcon ? <div className="pr-2">{startIcon}</div> : null}
-            {text}
-            {endIcon ? <div className="pl-2"> {endIcon}</div> : null}
-        </button>
-    )
-}
-
-{/* <Button variant="primary" size="md" onClick={() => { }} text={"ass"} /> */ }
-
-export default Button;
+// gray:{
+//   100 : #eeeeef,
+//   200 : #9492db,
+//   600 : #95989c
+// }
+// purple:{
+//   200 : #d9ddee,
+//   500 : #9492db,
+//   600 : #7164c0
+// }
