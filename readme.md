@@ -12,6 +12,10 @@ Brainly is a full-stack application that helps users organize and manage content
 
 ![Sign In Page](./Brainly-FE/src/assets/images/signIn.png)
 
+## Dashboard
+
+![Dashboard](./Brainly-FE/src/assets/images/dashboard%20picture.jpeg)
+
 ## Tech Stack
 
 - **Frontend**: React with TypeScript, Vite, Tailwind CSS

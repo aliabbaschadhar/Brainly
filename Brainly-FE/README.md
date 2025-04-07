@@ -19,6 +19,10 @@ This is the frontend application for Brainly, a modern web application built wit
 
 ![Sign In Page](./src/assets/images/signIn.png)
 
+### Dashboard
+
+![Dashboard](./src/assets/images/dashboard%20picture.jpeg)
+
 ## Tech Stack
 
 - React 18
